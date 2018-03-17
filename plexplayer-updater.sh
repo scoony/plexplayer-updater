@@ -22,3 +22,12 @@ appimage_filename=`basename $appimage_url`
 
 #### Create download link
 appimage_link=`echo $appimage_source$appimage_url | sed 's/\/plex\/\//\//g'`
+
+#### Download if missing
+if [[ ! -f "$appimage_source/$appimage_filename" ]]; then
+  echo "Downloading the new version ($appimage_version)"
+  wget -q "$appimage_link" -O "$appimage_source/$appimage_filename"
+  chmod +x "$appimage_source/$appimage_filename"
+else
+  echo "No update available"
+fi
