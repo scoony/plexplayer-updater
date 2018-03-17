@@ -33,24 +33,27 @@ if [[ ! -f "$target_folder/$appimage_filename" ]]; then
   echo "Downloading the new version ($appimage_version)"
   wget -q "$appimage_link" -O "$target_folder/$appimage_filename"
   chmod +x "$target_folder/$appimage_filename"
+  update_menu="yes"
 else
   echo "No update available"
 fi
 
 #### Update menu(s)
 ## locate must be installed
-updatedb
-locate "appimagekit-plexmediaplayer.desktop" > plexplayer.txt
-plexplayer_menu=()
-while IFS= read -r -d $'\n'; do
-plexplayer_menu+=("$REPLY")
-done <plexplayer.txt
-rm -f plexplayer.txt
-if [[ "${plexplayer_menu[@]}" != "" ]]; then
-  appimage_newbin_path=`echo "$target_folder/$appimage_filename"`
-  for menu in "${plexplayer_menu[@]}"; do
-    echo "work in progress"
-    appimage_oldbin_path=""
-    ##sed -i 's/'$appimage_oldbin_path'/'$appimage_newbin_path'/g' $menu
-  done
+if [[ "$update_menu" == "yes" ]]; then
+  updatedb
+  locate "appimagekit-plexmediaplayer.desktop" > plexplayer.txt
+  plexplayer_menu=()
+  while IFS= read -r -d $'\n'; do
+    plexplayer_menu+=("$REPLY")
+  done <plexplayer.txt
+  rm -f plexplayer.txt
+  if [[ "${plexplayer_menu[@]}" != "" ]]; then
+    appimage_newbin_path=`echo "$target_folder/$appimage_filename"`
+    for menu in "${plexplayer_menu[@]}"; do
+      echo "work in progress"
+      appimage_oldbin_path=""
+      ##sed -i 's/'$appimage_oldbin_path'/'$appimage_newbin_path'/g' $menu
+    done
+  fi
 fi
