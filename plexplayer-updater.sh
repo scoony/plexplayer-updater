@@ -48,8 +48,9 @@ done <plexplayer.txt
 rm -f plexplayer.txt
 if [[ "${plexplayer_menu[@]}" != "" ]]; then
   appimage_newbin_path=`echo "$target_folder/$appimage_filename"`
-  for smenu in "${plexplayer_menu[@]}"; do
+  for menu in "${plexplayer_menu[@]}"; do
     echo "work in progress"
-    ##sed -i 's/'$appimage_oldbin_path'/'$appimage_newbin_path'/g' $mon_script_config
+    appimage_oldbin_path=""
+    ##sed -i 's/'$appimage_oldbin_path'/'$appimage_newbin_path'/g' $menu
   done
 fi
