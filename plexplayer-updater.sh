@@ -2,6 +2,7 @@
 
 appimage_source="https://knapsu.eu/plex/"
 target_folder="/opt/Plex_Player"
+debug="no"
 
 #### Checking target folder
 if [[ ! -d "$target_folder" ]]; then
@@ -13,19 +14,19 @@ chmod 777 -R "$target_folder"
 
 #### Get last version URL
 appimage_url=`wget -q -O- "$appimage_source" | sed '/data\/plex\//!d' | sed -n '1p' | grep -Po '(?<=href=")[^"]*'`
-echo "Parsing successful: $appimage_url"
+if [[ "$debug" == "yes" ]]; then echo "Parsing successful: $appimage_url"; fi
 
 #### Get the version of the last package
 appimage_version=`basename $appimage_url | sed 's/Plex_Media_Player_//' | cut -d \- -f 1`
-echo "File version: $appimage_version"
+if [[ "$debug" == "yes" ]]; then echo "File version: $appimage_version"; fi
 
 #### Get the name of the file
 appimage_filename=`basename $appimage_url`
-echo "File name: $appimage_filename"
+if [[ "$debug" == "yes" ]]; then echo "File name: $appimage_filename"; fi
 
 #### Create download link
 appimage_link=`echo $appimage_source$appimage_url | sed 's/\/plex\/\//\//g'`
-echo "File Download Link: $appimage_link"
+if [[ "$debug" == "yes" ]]; then echo "File Download Link: $appimage_link"; fi
 
 #### Download if missing
 if [[ ! -f "$target_folder/$appimage_filename" ]]; then
