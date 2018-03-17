@@ -51,9 +51,9 @@ if [[ "$update_menu" == "yes" ]]; then
   if [[ "${plexplayer_menu[@]}" != "" ]]; then
     appimage_newbin_path=`echo "$target_folder/$appimage_filename"`
     for menu in "${plexplayer_menu[@]}"; do
-      echo "work in progress"
-      appimage_oldbin_path=""
-      ##sed -i 's/'$appimage_oldbin_path'/'$appimage_newbin_path'/g' $menu
+      echo "... trying to update the menu of each user"
+      appimage_oldbin_path=`cat $menu | grep -Po '(?<=Exec=")[^" %U]*' | sed -n '1p'`
+      sed -i 's/'$appimage_oldbin_path'/'$appimage_newbin_path'/g' $menu
     done
   fi
 fi
