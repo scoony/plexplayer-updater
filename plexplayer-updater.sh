@@ -4,8 +4,8 @@ appimage_source="https://knapsu.eu/plex/"
 target_folder="/opt/Plex_Player"
 
 #### Checking target folder
-if [[ -d "$target_folder" ]]; then
-  mkdir -e "$target_folder"
+if [[ ! -d "$target_folder" ]]; then
+  mkdir -p "$target_folder"
 fi
 
 #### Fixing access rights
