@@ -13,21 +13,25 @@ chmod 777 -R "$target_folder"
 
 #### Get last version URL
 appimage_url=`wget -q -O- "$appimage_source" | sed '/data\/plex\//!d' | sed -n '1p' | grep -Po '(?<=href=")[^"]*'`
+echo "Parsing successful: $appimage_url"
 
 #### Get the version of the last package
 appimage_version=`basename $appimage_url | sed 's/Plex_Media_Player_//' | cut -d \- -f 1`
+echo "File version: $appimage_version"
 
 #### Get the name of the file
 appimage_filename=`basename $appimage_url`
+echo "File name: $appimage_filename"
 
 #### Create download link
 appimage_link=`echo $appimage_source$appimage_url | sed 's/\/plex\/\//\//g'`
+echo "File Download Link: $appimage_link"
 
 #### Download if missing
-if [[ ! -f "$appimage_source$appimage_filename" ]]; then
+if [[ ! -f "$target_folder/$appimage_filename" ]]; then
   echo "Downloading the new version ($appimage_version)"
-  wget -q "$appimage_link" -O "$appimage_source$appimage_filename"
-  chmod +x "$appimage_source$appimage_filename"
+  wget -q "$appimage_link" -O "$target_folder/$appimage_filename"
+  chmod +x "$target_folder/$appimage_filename"
 else
   echo "No update available"
 fi
