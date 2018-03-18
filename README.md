@@ -1,6 +1,8 @@
 # plexplayer-updater
 An updater to keep Plex Media Player up to date
 
+
+
 This script will only keep Plex Media Player for linux up to date.
 
 I'm not the developper behind the Plex Media Player for Linux. All credits goes to Knapsu.
