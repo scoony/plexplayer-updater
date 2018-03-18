@@ -10,6 +10,6 @@ This is the webpage providing the file: https://knapsu.eu/plex/
 No need to contact me for Plex issues or anything Plex related, I just did the updater
 
 **Installation:**
-- copy the file in "/opt/scripts"
+- copy the file in "/opt/scripts" (or any other folder but don't forget to set it in the file)
 - chmod +x the file
 - add it to cron (root account to avoid issues)
