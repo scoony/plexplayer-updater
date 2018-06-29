@@ -33,6 +33,7 @@ if [[ ! -f "$target_folder/$appimage_filename" ]]; then
   echo "Downloading the new version ($appimage_version)"
   wget -q "$appimage_link" -O "$target_folder/$appimage_filename"
   chmod +x "$target_folder/$appimage_filename"
+  chmod 777 "$target_folder/$appimage_filename"
   update_menu="yes"
 else
   echo "No update available"
